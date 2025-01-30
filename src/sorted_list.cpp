@@ -88,7 +88,7 @@ bool SortedLinkedList::iterator::operator!=(iterator const& other) const { retur
 void error(string word, string msg) {
     cerr << "Error Word: " << word << "\n"
          << "Error Message: " << msg << "\n";
-    exit(EXIT_FAILURE); }
+    }
 void insert_all_words(int K, string file_name, SortedList& L){
     Timer t;
     double eTime;
