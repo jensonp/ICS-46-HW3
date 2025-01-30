@@ -1,4 +1,6 @@
 /* C++ interface for program benchmark timer management. */
+#ifndef TIMER_H
+#define TIMER_H
 
 #include <stdlib.h>
 #include <sys/time.h>
@@ -10,12 +12,12 @@
 class Timer
 {
 public:
-    int start();
-    int elapsedWallclockTime (double &);
-    int elapsedUserTime (double &);
-    int elapsedSystemTime (double &);
-    int elapsedTime (double &wc, double &us, double &system);
-
+    inline int start();
+    inline int elapsedWallclockTime (double &);
+    inline int elapsedUserTime (double &);
+    inline int elapsedSystemTime (double &);
+    inline int elapsedTime (double &wc, double &us, double &system);
+    
 private:
     rusage old_us_time;
     rusage new_us_time;
@@ -34,7 +36,7 @@ Timer::start()
         return 0;
 }
 
-int
+inline int
 Timer::elapsedWallclockTime (double &wc)
 {
     if (gettimeofday (&this->new_wc_time, nullptr) == -1)
@@ -44,7 +46,7 @@ Timer::elapsedWallclockTime (double &wc)
     return 0;
 }
 
-int
+inline int
 Timer::elapsedUserTime (double &ut)
 {
     if (getrusage (RUSAGE_SELF, &this->new_us_time) == -1)
@@ -56,7 +58,7 @@ Timer::elapsedUserTime (double &ut)
     return 0;
 }
 
-int
+inline int
 Timer::elapsedSystemTime (double &st)
 {
     if (getrusage (RUSAGE_SELF, &this->new_us_time) == -1)
@@ -68,7 +70,7 @@ Timer::elapsedSystemTime (double &st)
     return 0;
 }
 
-int
+inline int
 Timer::elapsedTime (double &wallclock, double &user_time, double &system_time)
 {
     if (this->elapsedWallclockTime (wallclock) == -1)
@@ -89,24 +91,6 @@ Timer::elapsedTime (double &wallclock, double &user_time, double &system_time)
 
             return 0;
         }
+
 }
-
-/* Example of use
-
-#include <iostream>
-using namespace std;
-#include "Timer.h"
-
-int main()
-{
-    Timer t;
-    double eTime;
-    t.start();
-    for (int i=0, j; i<1000000000; i++)
-        j++;
-    t.elapsedUserTime(eTime);
-    cout << eTime << endl;
-    return 0;
-}
-*/
-
+#endif
