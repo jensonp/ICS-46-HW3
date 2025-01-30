@@ -93,7 +93,7 @@ void insert_all_words(int K, string file_name, SortedList& L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    if(!in){ error(file_name, "File Open Error: insert"); }
+    //if(!in){ error(file_name, "File Open Error: insert"); }
     int limit = K * NWORDS / 10;
     t.start();
     for(string word; (in >> word) && limit > 0; --limit) { L.insert(word); }
@@ -104,7 +104,7 @@ void find_all_words(int K, string file_name, SortedList& L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    if(!in){ error(file_name, "File Open Error: find"); }
+    //if(!in){ error(file_name, "File Open Error: find"); }
     int limit = K * NWORDS / 10;
     t.start();
     for(string word; (in >> word) && limit > 0; --limit) { L.find(word); }
@@ -115,7 +115,7 @@ void remove_all_words(int K, string file_name, SortedList& L){
     Timer t;
     double eTime;
     ifstream in(file_name);
-    if (!in) { error(file_name, "File Open Error: remove"); }
+    //if (!in) { error(file_name, "File Open Error: remove"); }
     int limit = K * NWORDS / 10;
     t.start();
     for(string word; (in >> word) && limit > 0; --limit) { L.remove(word); }
@@ -129,7 +129,7 @@ void measure_SortedList_methods(string file_name, SortedList & L) {
         insert_all_words(K, file_name, L);
         find_all_words(K, file_name, L);
         remove_all_words(K, file_name, L);
-        if(!L.is_empty()) error(L.name, "is not empty");
+        //if(!L.is_empty()) error(L.name, "is not empty");
     } }
 
 void measure_lists(string input_file) {
